@@ -2,7 +2,7 @@
 
 ## Available Scripts
 1.Open your terminal and navigate to your project directory.
-2.Run the following command to install all the required dependencies
+Run the following command to install all the required dependencies
 ## `npm install`
 
 
