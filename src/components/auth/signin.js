@@ -73,7 +73,7 @@ const Signin = () => {
               style={css.userSignIn}
               value={emailLog}
               type='text'
-              placeholder="username"
+              placeholder="useremail"
               onChange={(e) => setEmailLog(e.target.value)}
             />
             {
