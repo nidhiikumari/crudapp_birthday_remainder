@@ -15,7 +15,13 @@ const loadUsersApi = 'http://localhost:3001/users';
 
 function* onLoadUsersStartAsync() {
   try {
-    const response = yield fetch(loadUsersApi);
+    const response = yield fetch(loadUsersApi, {
+      method: 'GET',
+      // body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
     const items = yield response.json();
     if (items) {
       yield delay(500);

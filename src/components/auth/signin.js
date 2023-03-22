@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import { EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
 import { Layout, Input, Typography, Alert, message } from 'antd';
@@ -33,18 +33,24 @@ const Signin = () => {
     if (!email) {
       errors.email = 'Email is required!';
       setFlag(true);
-    } else if (emails.replace(/"/g, "") !== email) {
+    } else if (emails && (emails.replace(/"/g, "") !== email)) {
       errors.email = 'This Email is not valid!';
       setFlag(true);
-    } 
+    } else if (!emails) {
+      errors.email = 'This Email is not valid!';
+      setFlag(true);
+    }
     if (!password) {
       errors.password = 'Password is required!';
       setFlag(true);
-    } else if (password !== pass.replace(/"/g, "")) {
+    } else if (pass && (password !== pass.replace(/"/g, ""))) {
+      errors.password = 'This Password is not valid!';
+      setFlag(true);
+    } else if (!pass) {
       errors.password = 'This Password is not valid!';
       setFlag(true);
     }
-    if (email && password && (password === pass.replace(/"/g, "")) && (email === emails.replace(/"/g, ""))) {
+    if (email && password && pass && emails && (password === pass.replace(/"/g, "")) && (email === emails.replace(/"/g, ""))) {
       success();
       setFlag(false);
       setTimeout(() => {
