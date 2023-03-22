@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "name": "Ervin Howell",
+      "email": "Shanna@melissa.tv",
+      "phone": "0106926593",
+      "id": 2
+    },
+    {
+      "name": "Mrs. Dennis Schulist",
+      "email": "Karley_Dach@jasper.info",
+      "phone": "147793584786430",
+      "id": 1
+    },
+    {
+      "name": "Kurtis Weissnat",
+      "email": "Telly.Hoeger@billy.biz",
+      "phone": "2100676132",
+      "id": 3
+    },
+    {
+      "name": "Glenna Reichert",
+      "email": "Chaim_McDermott@gmail.com",
+      "phone": "0106926533393",
+      "id": 4
+    },
+    {
+      "name": "Bret",
+      "email": "Bretdg@gmail.com",
+      "phone": "4446926593",
+      "id": 5
+    }
+  ]
+}
