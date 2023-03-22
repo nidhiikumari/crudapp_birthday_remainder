@@ -33,12 +33,10 @@ const Signin = () => {
     if (!email) {
       errors.email = 'Email is required!';
       setFlag(true);
-    } else if (emails !== email.replace(/"/g, "")) {
+    } else if (emails.replace(/"/g, "") !== email) {
       errors.email = 'This Email is not valid!';
       setFlag(true);
-    } else {
-      setFlag(false);
-    }
+    } 
     if (!password) {
       errors.password = 'Password is required!';
       setFlag(true);
@@ -56,7 +54,6 @@ const Signin = () => {
     setFormError(errors);
     return errors;
   };
-  console.log(formError);
 
   return (
     <div>

@@ -64,11 +64,6 @@ function* onDeleteUserStartAsync(userId) {
 }
 
 function* onUpdateUserStartAsync({ payload: { Id, formValue } }) {
-  const DATA = {
-    name: formValue.name,
-    email: formValue.email,
-    phone: formValue.phone
-  }
 
   try {
     const response = yield fetch(`${loadUsersApi}/${Id}`, {
