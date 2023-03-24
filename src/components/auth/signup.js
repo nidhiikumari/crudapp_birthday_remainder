@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import { EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
 import { Layout, Input, Typography, Alert, message } from 'antd';
@@ -15,12 +15,12 @@ const Signup = () => {
   const [formError, setFormError] = useState({});
   const [messageApi, contextHolder] = message.useMessage();
 
-  const success = () => {
+  const success = useCallback(() => {
     messageApi.open({
       type: 'success',
       content: 'Registered Successfully',
     });
-  };
+  }, [messageApi]);
   const handleSubmit = async (e) => {
     await e.preventDefault();
     await validate(userName, userEmail, userPassword);
@@ -71,7 +71,22 @@ const Signup = () => {
     return errors;
   };
 
-  const checkError = () => {
+  // const checkError = () => {
+  //   if (formError.email) {
+  //     setFlag(true);
+  //   } else if (formError.password) {
+  //     setFlag(true);
+  //   } else if (!formError.email && !formError.password && userName && userEmail && userPassword) {
+  //     localStorage.setItem("Email", JSON.stringify(userEmail));
+  //     localStorage.setItem("Password", JSON.stringify(userPassword));
+  //     success();
+  //     setTimeout(() => {
+  //       navigate('/signin');
+  //     }, 1000);
+  //   }
+  // };
+
+  const checkError = useCallback(() => {
     if (formError.email) {
       setFlag(true);
     } else if (formError.password) {
@@ -84,11 +99,13 @@ const Signup = () => {
         navigate('/signin');
       }, 1000);
     }
-  };
+  }, [formError, userName, userEmail, userPassword, navigate, success]);
 
   useEffect(() => {
     checkError();
-  }, [formError]);
+    const intervalId = setInterval(checkError, 5000);
+    return () => clearInterval(intervalId);
+  }, [checkError]);
 
   return (
     <div>

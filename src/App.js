@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import {
   Routes,
   Route,
-  useNavigate,
-  Redirect
+  useNavigate
 } from 'react-router-dom';
 import Signin from './components/auth/signin';
 import Signup from './components/auth/signup';
@@ -17,10 +16,12 @@ import Birthday from './components/birthday/birthday';
 function App() {
   const navigate = useNavigate();
   useEffect(() => {
-    if (!localStorage.getItem('Email') && !localStorage.getItem('Password')) {
-      navigate('/signin');
+    const email = localStorage.getItem('Email');
+    const password = localStorage.getItem('Password');
+    if (!email && !password) {
+      navigate('/signup');
     }
-  }, [localStorage]);
+  }, []);
   return (
     <div className="App">
       <Routes>

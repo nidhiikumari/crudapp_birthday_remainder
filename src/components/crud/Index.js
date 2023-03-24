@@ -93,7 +93,7 @@ const Index = () => {
 
   useEffect(() => {
     dispatch(loadUsersStart())
-  }, []);
+  }, [dispatch]);
 
   return (
     <div style={css.root}>

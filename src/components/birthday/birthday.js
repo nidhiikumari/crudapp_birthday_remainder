@@ -15,7 +15,7 @@ const { Title } = Typography;
 const Info = [
   {
     name: "Leanne Graham",
-    birthday: '1995-03-22',
+    birthday: '1995-03-25',
     age: 25,
     id: 1
   },
@@ -45,22 +45,46 @@ const Info = [
   },
   {
     name: "Patricia Lebsack",
-    birthday: '1915-03-23',
+    birthday: '1915-03-24',
+    age: 55,
+    id: 6
+  },
+  {
+    name: "Patruttcia Lebsack",
+    birthday: '1915-03-26',
+    age: 55,
+    id: 6
+  },
+  {
+    name: "Quyrycia Lebsack",
+    birthday: '1915-03-27',
+    age: 55,
+    id: 6
+  },
+  {
+    name: "hellcia Lebsack",
+    birthday: '1915-03-28',
     age: 55,
     id: 6
   }
 ];
 
-function Upcomming(person, toMonth) {
-  let currentDay = new Date().getDate();
-  let currentMonth = new Date().getMonth();
-  let filterData = person.filter((data) => {
-    let month = new Date(data.birthday).getMonth();
-    let date = new Date(data.birthday).getDate();
-    if (currentDay === date) return;
-    return month >= currentMonth && month <= currentMonth + toMonth
-  })
-  return filterData
+function Upcoming(person, toMonth) {
+  const currentDay = new Date().getDate();
+  const currentMonth = new Date().getMonth();
+  
+  const filterData = person.filter(data => {
+    const month = new Date(data.birthday).getMonth();
+    const date = new Date(data.birthday).getDate();
+    
+    if (currentDay === date) {
+      return false;
+    }
+    
+    return (month >= currentMonth && month <= currentMonth + toMonth);
+  });
+
+  return filterData;
 }
 
 const Birthday = () => {
@@ -120,7 +144,7 @@ const Birthday = () => {
           }
           <Title level={4} style={css.upcomingStyle}>Upcomming</Title>
           <div style={css.upcoming}>
-            <List info={Upcomming(Info, 2)} closeInfo='upcomming' />
+            <List info={Upcoming(Info, 2)} closeInfo='upcomming' />
           </div>
         </Content>
       </Content>

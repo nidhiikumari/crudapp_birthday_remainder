@@ -34,7 +34,6 @@ const crudCss = {
     width: '50%',
     display: 'flex',
     flexDirection: 'column',
-    borderRadius: '3px',
     padding: '12px 205px',
     justifyContent: 'flex-start',
     margin: 'auto',

@@ -51,7 +51,7 @@ const Edit = () => {
       const singleUser = users.find((item) => item.id === Number(state.editData))
       setFormValue({ ...singleUser })
     }
-  }, [state.editData]);
+  }, [state.editData, users]);
   return (
     <div>
       <Appbar />
