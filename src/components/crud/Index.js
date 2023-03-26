@@ -100,7 +100,7 @@ const Index = () => {
       <Layout>
         <Appbar />
       </Layout>
-      <Title>Welcome to Crud App</Title>
+      <Title style={css.crudStyle}>Welcome to Crud App</Title>
       {
         loading ? <Spin style={css.spinner} indicator={antIcon} />
           : (
