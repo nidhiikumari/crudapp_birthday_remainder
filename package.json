@@ -20,8 +20,8 @@
   "scripts": {
     "start": "concurrently \"npm run react-start\" \"npm run server-start\"",
     "react-start": "react-scripts start",
+    "build": "concurrently \"react-scripts build\" \"npm run server-start\"",
     "server-start": "json-server --watch db.json --port 3001",
-    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
