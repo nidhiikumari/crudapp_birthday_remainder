@@ -21,9 +21,11 @@ const Signup = () => {
       content: 'Registered Successfully',
     });
   }, [messageApi]);
-  const handleSubmit = async (e) => {
-    await e.preventDefault();
-    await validate(userName, userEmail, userPassword);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    validate(userName, userEmail, userPassword);
+    // checkError();
   };
 
   const validate = (name, email, pass) => {
@@ -67,45 +69,17 @@ const Signup = () => {
       errors.password = 'At least one Special Characters';
       setFlag(true);
     }
-    setFormError(errors);
-    return errors;
-  };
-
-  // const checkError = () => {
-  //   if (formError.email) {
-  //     setFlag(true);
-  //   } else if (formError.password) {
-  //     setFlag(true);
-  //   } else if (!formError.email && !formError.password && userName && userEmail && userPassword) {
-  //     localStorage.setItem("Email", JSON.stringify(userEmail));
-  //     localStorage.setItem("Password", JSON.stringify(userPassword));
-  //     success();
-  //     setTimeout(() => {
-  //       navigate('/signin');
-  //     }, 1000);
-  //   }
-  // };
-
-  const checkError = useCallback(() => {
-    if (formError.email) {
-      setFlag(true);
-    } else if (formError.password) {
-      setFlag(true);
-    } else if (!formError.email && !formError.password && userName && userEmail && userPassword) {
+    else {
+      success();
       localStorage.setItem("Email", JSON.stringify(userEmail));
       localStorage.setItem("Password", JSON.stringify(userPassword));
-      success();
       setTimeout(() => {
         navigate('/signin');
       }, 1000);
     }
-  }, [formError, userName, userEmail, userPassword, navigate, success]);
-
-  useEffect(() => {
-    checkError();
-    const intervalId = setInterval(checkError, 5000);
-    return () => clearInterval(intervalId);
-  }, [checkError]);
+    setFormError(errors);
+    return errors;
+  };
 
   return (
     <div>
