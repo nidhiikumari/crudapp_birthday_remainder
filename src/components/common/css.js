@@ -12,6 +12,9 @@ const crudCss = {
     color: 'white',
     alignItems: 'center'
   },
+  crudStyle: {
+   textAlign:'center'
+  },
   headerStyle: {
     display: 'flex',
     justifyContent: 'space-between',
