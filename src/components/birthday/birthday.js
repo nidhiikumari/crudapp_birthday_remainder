@@ -15,7 +15,7 @@ const { Title } = Typography;
 const Info = [
   {
     name: "Leanne Graham",
-    birthday: '1995-03-25',
+    birthday: '1995-03-28',
     age: 25,
     id: 1
   },
@@ -45,13 +45,13 @@ const Info = [
   },
   {
     name: "Patricia Lebsack",
-    birthday: '1915-03-24',
+    birthday: '1915-03-29',
     age: 55,
     id: 6
   },
   {
     name: "Patruttcia Lebsack",
-    birthday: '1915-03-26',
+    birthday: '1915-03-29',
     age: 55,
     id: 6
   },
