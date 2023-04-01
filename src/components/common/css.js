@@ -3,7 +3,7 @@ const crudCss = {
     backgroundColor: 'antiquewhite',
     height: '100vh',
     overFlow: 'scroll',
-    paddingBottom: 23
+    paddingBottom: 33
   },
   navTitle: {
     color: 'white'

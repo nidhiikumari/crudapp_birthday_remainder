@@ -51,6 +51,7 @@ const Add = () => {
 
   return (
     <div>
+      {contextHolder}
       <Appbar />
       <Layout style={css.addUserBox}>
         <Title>Add User</Title>

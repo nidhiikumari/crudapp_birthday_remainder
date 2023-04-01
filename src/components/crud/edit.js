@@ -25,7 +25,7 @@ const Edit = () => {
   const success = () => {
     messageApi.open({
       type: 'success',
-      content: 'Users Updated Succesfully',
+      content: 'User Updated Succesfully',
     });
   };
 
@@ -55,6 +55,7 @@ const Edit = () => {
 
   return (
     <div>
+      {contextHolder}
       <Appbar />
       <Layout style={css.addUserBox}>
         <Title>Edit User</Title>

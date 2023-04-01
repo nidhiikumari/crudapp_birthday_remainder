@@ -28,8 +28,7 @@ export const loadUser = () => {
     fetch(API_URL)
       .then((response) => response.json())
       .then((data) => {
-        dispatch(getUser(data))
-        console.log(data, 'data')
+        dispatch(getUser(data));
       })
       .catch((error) => console.log(error))
   }
@@ -48,7 +47,6 @@ export const deletedUser = (id) => {
 }
 
 export const addedUser = (DATA) => {
-  console.log(DATA, 'data')
   return function (dispatch) {
     fetch(API_URL, {
       method: 'POST',
@@ -68,7 +66,6 @@ export const addedUser = (DATA) => {
 }
 
 export const updatedUser = (DATA) => {
-  console.log(DATA, 'data')
   return function (dispatch) {
     fetch(`${API_URL}/${DATA.id}`, {
       method: 'PUT',
@@ -85,7 +82,6 @@ export const updatedUser = (DATA) => {
       .then((data) => {
         dispatch(updateUser());
         dispatch(loadUser());
-        console.log(data);
       })
       .catch((error) => console.log(error))
   }
