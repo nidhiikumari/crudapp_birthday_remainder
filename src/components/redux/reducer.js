@@ -1,52 +1,35 @@
 import * as types from './actionType';
 const initialState = {
   users: [],
+  user: [],
   loading: false,
   error: null
 };
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.LOAD_USERS_START:
-    case types.CREATE_USER_START:
-    case types.DELETE_USER_START:
-    case types.UPDATE_USER_START:
+    case types.ADD_USER:
       return {
         ...state,
-        loading: true
+        user: [...state.user, action.payload],
       };
-    case types.LOAD_USERS_SUCCESS:
+    case types.DELETE_USER:
       return {
         ...state,
-        loading: false,
-        users: action.payload
+        user: state.user.filter((user) => user.id !== action.payload),
+        loading: false
       };
-    case types.CREATE_USER_SUCCESS:
+    case types.UPDATE_USER:
       return {
         ...state,
-        loading: false,
-        users: [...state.users, action.payload],
+        user: state.user.map((user) =>
+          user.id === action.payload.id ? action.payload : user
+        ),
       };
-    case types.UPDATE_USER_SUCCESS:
-      const updatedUser = action.payload;
+    case types.GET_USER:
       return {
         ...state,
-        loading: false,
-        users: state.users.map((user) => (Number(user.id) === Number(updatedUser.id) ? updatedUser : user))
-      };
-    case types.DELETE_USER_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        users: state.users.filter((item) => item.id !== action.payload)
-      }
-    case types.LOAD_USERS_ERROR:
-    case types.CREATE_USER_ERROR:
-    case types.DELETE_USER_ERROR:
-    case types.UPDATE_USER_ERROR:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload
+        user: action.payload,
+        loading: false
       };
     default:
       return state;

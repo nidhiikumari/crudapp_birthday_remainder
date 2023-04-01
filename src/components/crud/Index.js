@@ -14,7 +14,7 @@ import { LoadingOutlined, DeleteTwoTone, EyeTwoTone, EditTwoTone } from '@ant-de
 import { useDispatch, useSelector } from 'react-redux';
 import css from '../common/css';
 import Appbar from '../common/header';
-import { deleteUserStart, loadUsersStart } from '../redux/action';
+import { getUser, deletedUser, loadUser } from '../redux/action';
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -24,7 +24,7 @@ const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 const Index = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { users, loading } = useSelector(state => state.data);
+  const users = useSelector(state => state.data);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalViewOpen, setIsModalViewOpen] = useState(false);
   const [userDetails, setUserDetails] = useState([]);
@@ -36,12 +36,14 @@ const Index = () => {
   };
 
   const handleOk = () => {
-    dispatch(deleteUserStart(id));
+    dispatch(deletedUser(id));
     setIsModalOpen(false);
   };
+
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   const handleEdit = (data) => {
     navigate(`/edit/${data.id}`, { state: { editData: data.id } });
   };
@@ -92,7 +94,7 @@ const Index = () => {
   ];
 
   useEffect(() => {
-    dispatch(loadUsersStart())
+    dispatch(loadUser());
   }, [dispatch]);
 
   return (
@@ -102,25 +104,25 @@ const Index = () => {
       </Layout>
       <Title style={css.crudStyle}>Welcome to Crud App</Title>
       {
-        loading ? <Spin style={css.spinner} indicator={antIcon} />
+        users && users.loading ? <Spin style={css.spinner} indicator={antIcon} />
           : (
-            <Content
-              style={{ padding: '0 210px' }}
-            >
-              <Table
-                columns={columns}
-                dataSource={users.map((row) => ({
-                  Name: row.name,
-                  Email: row.email,
-                  id: row.id,
-                  Phone: row.phone
-                }))}
-                bordered
-                style={css.tableStyle}
-                pagination={{ pageSize: 12 }}
-              />
-            </Content>
-          )
+      <Content
+        style={{ padding: '0 210px' }}
+      >
+        <Table
+          columns={columns}
+          dataSource={users && users.user && users.user.length > 0 && users.user.map((row) => ({
+            Name: row.name,
+            Email: row.email,
+            id: row.id,
+            Phone: row.phone
+          }))}
+          bordered
+          style={css.tableStyle}
+          pagination={{ pageSize: 12 }}
+        />
+      </Content>
+      )
       }
       <Modal
         title="Delete"

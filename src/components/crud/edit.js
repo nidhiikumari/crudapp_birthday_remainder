@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import { Layout, Input, Typography, message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUserStart } from '../redux/action';
+import { updatedUser } from '../redux/action';
 import css from '../common/css';
 import Appbar from '../common/header';
 
@@ -18,7 +18,7 @@ const Edit = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { users } = useSelector(state => state.data);
+  const users = useSelector(state => state.data);
   const [formValue, setFormValue] = useState(initialState);
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -34,7 +34,7 @@ const Edit = () => {
   const submitHandle = (e) => {
     e.preventDefault();
     if (name && email && phone) {
-      dispatch(updateUserStart({ Id, formValue }));
+      dispatch(updatedUser(formValue));
       success();
       setTimeout(() => {
         navigate('/');
@@ -48,10 +48,11 @@ const Edit = () => {
   }
   useEffect(() => {
     if (state.editData) {
-      const singleUser = users.find((item) => item.id === Number(state.editData))
+      const singleUser = users && users.user && users.user.length > 0 && users.user.find((item) => item.id === Number(state.editData))
       setFormValue({ ...singleUser })
     }
-  }, [state.editData, users]);
+  }, [state.editData, users.user]);
+
   return (
     <div>
       <Appbar />

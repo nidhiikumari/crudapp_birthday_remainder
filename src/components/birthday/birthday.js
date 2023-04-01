@@ -27,7 +27,7 @@ const Info = [
   },
   {
     name: "Kurtis Weissnat",
-    birthday: '1992-04-09',
+    birthday: '1992-04-01',
     age: 67,
     id: 3
   },
@@ -45,13 +45,13 @@ const Info = [
   },
   {
     name: "Patricia Lebsack",
-    birthday: '1915-03-29',
+    birthday: '1915-04-02',
     age: 55,
     id: 6
   },
   {
     name: "Patruttcia Lebsack",
-    birthday: '1915-03-29',
+    birthday: '1915-04-03',
     age: 55,
     id: 6
   },
@@ -63,7 +63,7 @@ const Info = [
   },
   {
     name: "hellcia Lebsack",
-    birthday: '1915-03-28',
+    birthday: '1915-04-04',
     age: 55,
     id: 6
   }

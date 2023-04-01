@@ -1,51 +1,92 @@
 import * as types from './actionType';
-export const loadUsersStart = () => ({
-  type: types.LOAD_USERS_START,
-});
-export const loadUsersSuccess = (users) => ({
-  type: types.LOAD_USERS_SUCCESS,
-  payload: users
-});
-export const loadUsersError = (error) => ({
-  type: types.LOAD_USERS_ERROR,
-  payload: error
-});
+import { ADD_USER, DELETE_USER, UPDATE_USER, GET_USER } from './actionType';
 
-export const createUserStart = (user) => ({
-  type: types.CREATE_USER_START,
-  payload: user
-});
-export const createUserSuccess = (user) => ({
-  type: types.CREATE_USER_SUCCESS,
+const API_URL = 'http://localhost:3001/users';
+
+export const addUser = (user) => ({
+  type: ADD_USER,
   payload: user,
 });
-export const createUserError = (error) => ({
-  type: types.CREATE_USER_ERROR,
-  payload: error
+
+export const deleteUser = (id) => ({
+  type: DELETE_USER,
+  payload: id,
 });
 
-export const deleteUserStart = (userId) => ({
-  type: types.DELETE_USER_START,
-  payload: userId
-});
-export const deleteUserSuccess = (userId) => ({
-  type: types.DELETE_USER_SUCCESS,
-  payload: userId,
-});
-export const deleteUserError = (error) => ({
-  type: types.DELETE_USER_ERROR,
-  payload: error
+export const updateUser = (user) => ({
+  type: UPDATE_USER,
+  payload: user,
 });
 
-export const updateUserStart = (userInfo) => ({
-  type: types.UPDATE_USER_START,
-  payload: userInfo
+export const getUser = (user) => ({
+  type: GET_USER,
+  payload: user
 });
-export const updateUserSuccess = (userInfo) => ({
-  type: types.UPDATE_USER_SUCCESS,
-  payload: userInfo
-});
-export const updateUserError = (error) => ({
-  type: types.UPDATE_USER_ERROR,
-  payload: error
-});
+
+export const loadUser = () => {
+  return function (dispatch) {
+    fetch(API_URL)
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(getUser(data))
+        console.log(data, 'data')
+      })
+      .catch((error) => console.log(error))
+  }
+}
+
+export const deletedUser = (id) => {
+  return function (dispatch) {
+    fetch(`${API_URL}/${id}`, { method: 'DELETE' })
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(deleteUser());
+        dispatch(loadUser());
+      })
+      .catch((error) => console.log(error))
+  }
+}
+
+export const addedUser = (DATA) => {
+  console.log(DATA, 'data')
+  return function (dispatch) {
+    fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(DATA),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(addUser());
+        dispatch(loadUser());
+        console.log(data);
+      })
+      .catch((error) => console.log(error))
+  }
+}
+
+export const updatedUser = (DATA) => {
+  console.log(DATA, 'data')
+  return function (dispatch) {
+    fetch(`${API_URL}/${DATA.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: DATA.name,
+        email: DATA.email,
+        phone: DATA.phone
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(updateUser());
+        dispatch(loadUser());
+        console.log(data);
+      })
+      .catch((error) => console.log(error))
+  }
+}

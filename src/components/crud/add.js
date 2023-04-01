@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Layout, Input, Typography, message } from 'antd';
 import { useDispatch } from 'react-redux';
-import { createUserStart } from '../redux/action';
+import { addedUser } from '../redux/action';
 import css from '../common/css';
 import Appbar from '../common/header';
 
@@ -31,7 +31,12 @@ const Add = () => {
   const submitHandle = (e) => {
     e.preventDefault();
     if (name && email && phone) {
-      dispatch(createUserStart(formValue));
+      const DATA = {
+        name,
+        email,
+        phone
+      }
+      dispatch(addedUser(DATA));
       success();
       setTimeout(() => {
         navigate('/');

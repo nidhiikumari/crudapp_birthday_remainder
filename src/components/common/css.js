@@ -1,7 +1,9 @@
 const crudCss = {
   root: {
     backgroundColor: 'antiquewhite',
-    height: '100vh'
+    height: '100vh',
+    overFlow: 'scroll',
+    paddingBottom: 23
   },
   navTitle: {
     color: 'white'
