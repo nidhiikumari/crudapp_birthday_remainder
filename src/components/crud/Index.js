@@ -137,6 +137,7 @@ const Index = () => {
         title="User Details"
         open={isModalViewOpen}
         onOk={handleViewOk}
+        footer={null}
         onCancel={handleViewCancel}
       >
         {
